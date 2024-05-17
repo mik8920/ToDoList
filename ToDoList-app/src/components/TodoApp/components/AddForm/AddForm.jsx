@@ -16,12 +16,12 @@ export default function AddForm({ todos, setTodos }) {
 
   //handleAddition function adds new todo items
   const handleAddition = (e) => {
-    const newTodos = [...todos]; //clone of todos array
+    const newTodos = [...todos]; //copy of todos array
     newTodos.push({
       title: todoVal,
       status: false,
     });
-    setTodos(newTodos); //updating the state 
+    setTodos(newTodos); //updating the state
     handleReset(e);
   };
 
@@ -31,11 +31,11 @@ export default function AddForm({ todos, setTodos }) {
 
     if (todoVal === "") {
       setErrorMessage("Input cannot be empty");
-      inputRef.current.style.outline= "1px solid red";
+      inputRef.current.style.outline = "1px solid red";
 
       return;
     } else {
-      inputRef.current.style.outline= "1px solid lightgrey";
+      inputRef.current.style.outline = "1px solid lightgrey";
 
       handleAddition(e);
     }
@@ -60,9 +60,6 @@ export default function AddForm({ todos, setTodos }) {
       </form>
 
       {errorMessage && <p className="errorMessage">{errorMessage}</p>}
-
-
-{/*  if todos array=0 they are no todos*/}
       {todos.length === 0 && (
         <p className="addTodoMessage">
           You do not have any todos yet. Add one now!
