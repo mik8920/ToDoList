@@ -13,7 +13,7 @@ export default function ListItem({ todo, toggleStatus, todos, setTodos }) {
   };
 
   return (
-    <ListItemText >
+    <ListItemText>
       <Paper
         elevation={3}
         square={false}
@@ -40,7 +40,7 @@ export default function ListItem({ todo, toggleStatus, todos, setTodos }) {
           <Grid Item>
             <Button
               onClick={() => handleRemoval(todo.title)}
-              size="sm"
+              size="medium"
               style={{ color: "#B197FC" }}
               endIcon={<FontAwesomeIcon icon={faTrash} />}
             />
