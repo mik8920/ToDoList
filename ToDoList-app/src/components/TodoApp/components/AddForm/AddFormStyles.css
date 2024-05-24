@@ -1,4 +1,4 @@
-:root {
+/* :root {
   --input-outline-color: #1e90ff;
   --color-button: #20b2aa;
   --parMessage:#6A5ACD;
@@ -27,7 +27,7 @@ input:focus {
   align-items: center;
 }
 
-.todoForm button {
+ .todoForm button {
   border-radius: 4px;
   padding: 4px;
   border: 1px solid (var(--color-button));
@@ -36,7 +36,7 @@ input:focus {
   color: white;
   background-color: var(--color-button);
   cursor: pointer;
-}
+} 
 
 .addTodoMessage{
   font-size: 1.2rem;
@@ -57,3 +57,11 @@ input:focus {
   content:"* "
 }
 
+.errorOutlineColor{
+  outline: 1px solid red;
+}
+
+
+.OutlineColor{
+outline: 1px solid lightgrey;
+} */

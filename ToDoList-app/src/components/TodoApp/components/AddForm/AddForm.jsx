@@ -1,70 +1,96 @@
 /* eslint-disable react/prop-types */
 import { useState, useRef } from "react";
-import "./AddFormStyles.css";
+import { Button, TextField, Typography, Grid } from "@mui/material";
 
 export default function AddForm({ todos, setTodos }) {
-  const [todoVal, setTodoVal] = useState(""); //Holds the value of the input field
-  const [errorMessage, setErrorMessage] = useState("");
+  const [inputVal, setinputVal] = useState(""); //Holds the value of the input field
   const inputRef = useRef(null); //Reference to the input field DOM element
+  const [inputInvalid, setInputInvalid] = useState(false);
 
   //handleReset function resets the form
   const handleReset = (e) => {
-    setTodoVal("");
-    setErrorMessage("");
+    setinputVal("");
     e.target.reset();
   };
 
   //handleAddition function adds new todo items
   const handleAddition = (e) => {
-    const newTodos = [...todos]; //copy of todos array
+    const newTodos = [...todos]; //copy of todos array to avoid mutating state
     newTodos.push({
-      title: todoVal,
+      title: inputVal,
       status: false,
     });
     setTodos(newTodos); //updating the state
     handleReset(e);
   };
 
-  //handleSubmit function handles form submission + validation
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (todoVal === "") {
-      setErrorMessage("Input cannot be empty");
-      inputRef.current.style.outline = "1px solid red";
-
+    if (!inputVal) {
+      setInputInvalid(true);
       return;
-    } else {
-      inputRef.current.style.outline = "1px solid lightgrey";
-
-      handleAddition(e);
     }
+    setInputInvalid(false);
+    handleAddition(e);
   };
 
-  //handleChange function handle changes in the input field
+  //handleChange function handles changes in the input field
   const handleChange = (e) => {
-    setTodoVal(e.target.value);
+    if (inputInvalid) {
+      setInputInvalid(false);
+    }
+    setinputVal(e.target.value);
   };
 
   return (
-    <div>
-      <form action="" className="todoForm" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Add to-do"
-          name="todoName"
-          onChange={handleChange}
-          ref={inputRef} //Referencing the input field
-        />
-        <button type="submit">Add To-Do</button>
-      </form>
+    <Grid container spacing={1} sx={{ justifyContent: "center" }}>
+      <Grid item xs={12} >
+        <form action="" className="todoForm" onSubmit={handleSubmit} noValidate>
+          <Grid container direction='row' spacing={2} sx={{justifyContent:"center"}}> 
+            <Grid item>
+              <TextField
+                size="small"
+                placeholder="Add to-do"
+                name="todoName"
+                helperText={inputInvalid ? "Input cannot be empty" : ""}
+                value={inputVal}
+                error={inputInvalid}
+                onChange={handleChange}
+                inputRef={inputRef} //Referencing the input field
+                required
+              />
+            </Grid>
 
-      {errorMessage && <p className="errorMessage">{errorMessage}</p>}
-      {todos.length === 0 && (
-        <p className="addTodoMessage">
-          You do not have any todos yet. Add one now!
-        </p>
-      )}
-    </div>
+            <Grid item>
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{
+                  color: "primary",
+                  backgroundColor: "#20b2aa",
+                  "&:hover": {
+                    backgroundColor: "#20b2aa",
+                  },
+                }}
+              >
+                Add To-Do
+              </Button>
+            </Grid>
+          </Grid>
+        </form>
+      </Grid>
+
+      <Grid item xs={12}>
+        {todos.length === 0 && (
+          <Typography
+            variant="body1"
+            sx={{ color: "#6A5ACD", fontSize: "1.2rem", fontStyle: "italic" }}
+          >
+            {`You don't have any todos yet. Add one now!`}
+          </Typography>
+        )}
+      </Grid>
+    </Grid>
   );
 }
