@@ -17,7 +17,7 @@ export default function ListItem({ todo, toggleStatus, todos, setTodos }) {
       <Paper
         elevation={3}
         square={false}
-        sx={{ margin: "0.5rem", width: "fit-content", padding: "0.5rem", width:'32rem'  }}
+        sx={{ margin: "0.5rem", padding: "0.5rem", width:'32rem'  }}
       >
         <Grid
           container
@@ -25,7 +25,7 @@ export default function ListItem({ todo, toggleStatus, todos, setTodos }) {
           spacing={1}
           sx={{ justifyContent: "space-between", alignItems:"center" }}
         >
-          <Grid Item>
+          <Grid Item >
             <Checkbox
               name={todo.title}
               checked={todo.status}
