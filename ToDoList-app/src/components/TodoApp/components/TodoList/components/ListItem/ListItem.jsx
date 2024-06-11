@@ -7,7 +7,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 export default function ListItem({ todo, toggleStatus, todos, setTodos }) {
   //handleRemoval function removes todo items
   const handleRemoval = (todoTitle) => {
-    //filters out todos and updates the state with a new array]
+    //filters out todos and updates the state with a new array
     const newTodos = todos.filter((todo) => todoTitle !== todo.title);
     setTodos(newTodos);
   };
